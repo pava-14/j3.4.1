@@ -40,8 +40,19 @@ public class AfishaManager {
         return result;
     }
 
-    // наивная реализация
+    private boolean isExistsId(int id) {
+        for (AfishaItem item : items) {
+            if (item.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void removeById(int id) {
+        if (!isExistsId(id)) {
+            return;
+        }
         int length = items.length - 1;
         AfishaItem[] tmp = new AfishaItem[length];
         int index = 0;
@@ -51,7 +62,6 @@ public class AfishaManager {
                 index++;
             }
         }
-        // меняем наши элементы
         items = tmp;
     }
 }

@@ -54,7 +54,6 @@ class AfishaManagerTest {
         AfishaItem movie03 = new AfishaItem(3, "http://zxc.ru/03", "Movie 03", "First genre");
         AfishaItem movie04 = new AfishaItem(4, "http://zxc.ru/04", "Movie 04", "Second genre");
         AfishaItem movie05 = new AfishaItem(5, "http://zxc.ru/05", "Movie 05", "Second genre");
-
         manager.add(movie01);
         manager.add(movie02);
         manager.add(movie03);
@@ -79,14 +78,13 @@ class AfishaManagerTest {
         manager.add(movie03);
 
         manager.removeById(idToRemove);
-
         AfishaItem[] actual = manager.getAfishaList();
         AfishaItem[] expected = new AfishaItem[]{movie03, movie02};
 
         assertArrayEquals(expected, actual);
     }
 
-//    @Test
+    @Test
     public void shouldNotRemoveIfNotExists() {
         AfishaManager manager = new AfishaManager();
         int idToRemove = 4;
@@ -98,7 +96,6 @@ class AfishaManagerTest {
         manager.add(movie03);
 
         manager.removeById(idToRemove);
-
         AfishaItem[] actual = manager.getAfishaList();
         AfishaItem[] expected = new AfishaItem[]{movie03, movie02, movie01};
 
