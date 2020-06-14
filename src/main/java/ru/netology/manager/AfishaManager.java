@@ -1,9 +1,10 @@
 package ru.netology.manager;
 
 import ru.netology.domain.AfishaItem;
+import ru.netology.domain.AfishaRepository;
 
 public class AfishaManager {
-    private AfishaItem[] items = new AfishaItem[0];
+    private AfishaRepository repository;
     private int defaultGetCount = 10;
 
     public AfishaManager() {
@@ -14,24 +15,17 @@ public class AfishaManager {
     }
 
     public void add(AfishaItem item) {
-        // создаём новый массив размером на единицу больше
-        int length = items.length + 1;
-        AfishaItem[] tmp = new AfishaItem[length];
-        System.arraycopy(items, 0, tmp, 0, items.length);
-        // кладём последним наш элемент
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
+        repository.save(item);
     }
 
     public AfishaItem[] getAfishaList() {
         // Устанавливаем количество возвращаемых афиш
+        AfishaItem[] items = repository.findAll();
         int currentCount = defaultGetCount;
         if (currentCount > items.length) {
             currentCount = items.length;
         }
         AfishaItem[] result = new AfishaItem[currentCount];
-
         int index = 0;
         for (int i = items.length - 1; i >= items.length - currentCount; i--) {
             result[index] = items[i];
@@ -40,18 +34,7 @@ public class AfishaManager {
         return result;
     }
 
-    // наивная реализация
     public void removeById(int id) {
-        int length = items.length - 1;
-        AfishaItem[] tmp = new AfishaItem[length];
-        int index = 0;
-        for (AfishaItem item : items) {
-            if (item.getId() != id) {
-                tmp[index] = item;
-                index++;
-            }
-        }
-        // меняем наши элементы
-        items = tmp;
+        repository.removeById(id);
     }
 }

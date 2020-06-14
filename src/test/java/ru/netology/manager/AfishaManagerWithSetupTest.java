@@ -19,7 +19,7 @@ class AfishaManagerWithSetupTest {
     AfishaItem movie09 = new AfishaItem(9, "http://zxc.ru/09", "Movie 09", "Third genre");
     AfishaItem movie10 = new AfishaItem(10, "http://zxc.ru/10", "Movie 10", "Third genre");
     AfishaItem movie11 = new AfishaItem(11, "http://zxc.ru/11", "First 11", "Third genre");
-
+/*
     @BeforeEach
     public void setUp() {
         manager.add(movie01);
@@ -43,4 +43,6 @@ class AfishaManagerWithSetupTest {
 
         assertArrayEquals(expected, actual);
     }
+
+ */
 }
