@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AfishaItem {
-  private int id;
-  private String imageUrl;
-  private String name;
-  private String genre;
+    private int id;
+    private String imageUrl;
+    private String name;
+    private String genre;
 }
