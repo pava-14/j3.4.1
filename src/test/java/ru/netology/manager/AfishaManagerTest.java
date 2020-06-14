@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AfishaManagerTest {
 
     @Test
-    public void shoulAdd() {
+    public void shouldAdd() {
         AfishaManager manager = new AfishaManager();
         AfishaItem movie01 = new AfishaItem(1, "http://zxc.ru/01", "Movie 01", "First genre");
         AfishaItem movie02 = new AfishaItem(2, "http://zxc.ru/02", "Movie 02", "First genre");
@@ -47,6 +47,7 @@ class AfishaManagerTest {
 
     @Test
     public void shouldGetAllExists() {
+        // Количество возвращаемых фильмов, по-умолчанию, 10
         AfishaManager manager = new AfishaManager();
         AfishaItem movie01 = new AfishaItem(1, "http://zxc.ru/01", "Movie 01", "First genre");
         AfishaItem movie02 = new AfishaItem(2, "http://zxc.ru/02", "Movie 02", "First genre");
