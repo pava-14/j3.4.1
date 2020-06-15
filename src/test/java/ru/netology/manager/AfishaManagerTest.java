@@ -18,6 +18,7 @@ class AfishaManagerTest {
     private AfishaRepository repository;
     @InjectMocks
     private AfishaManager manager;
+
     private AfishaItem movie01 = new AfishaItem(1, "http://zxc.ru/01", "Movie 01", "First genre");
     private AfishaItem movie02 = new AfishaItem(2, "http://zxc.ru/02", "Movie 02", "First genre");
     private AfishaItem movie03 = new AfishaItem(3, "http://zxc.ru/03", "Movie 03", "First genre");
@@ -30,60 +31,11 @@ class AfishaManagerTest {
     private AfishaItem movie10 = new AfishaItem(10, "http://zxc.ru/10", "Movie 10", "Third genre");
     private AfishaItem movie11 = new AfishaItem(11, "http://zxc.ru/11", "First 11", "Third genre");
 
-    @BeforeEach
-    public void setUp() {
-        //Заглушка
-        doNothing().when(repository).save(movie01);
-        doNothing().when(repository).save(movie02);
-        doNothing().when(repository).save(movie03);
-        doNothing().when(repository).save(movie04);
-
-        manager.add(movie01);
-        manager.add(movie02);
-        manager.add(movie03);
-        manager.add(movie04);
-    }
-
-    @Test
-    public void shouldAdd() {
-        // Заглушка
-        AfishaItem[] returned = new AfishaItem[]{movie01, movie02, movie03, movie04, movie05};
-        doReturn(returned).when(repository).findAll();
-        doNothing().when(repository).save(movie05);
-
-        manager.add(movie05);
-        AfishaItem[] actual = manager.getAfishaList();
-        AfishaItem[] expected = new AfishaItem[]{movie05, movie04, movie03, movie02, movie01};
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldGetLastFive() {
-        // Заглушка
-        AfishaItem[] returned = new AfishaItem[]{movie02, movie03, movie04, movie05, movie06};
-        doReturn(returned).when(repository).findAll();
-        doNothing().when(repository).save(movie05);
-        doNothing().when(repository).save(movie06);
-
-        manager.add(movie05);
-        manager.add(movie06);
-        AfishaItem[] actual = manager.getAfishaList();
-        AfishaItem[] expected = new AfishaItem[]{movie06, movie05, movie04, movie03, movie02};
-
-        assertArrayEquals(expected, actual);
-    }
-
     @Test
     public void shouldGetAllExists() {
-        // Заглушка
         AfishaItem[] returned = new AfishaItem[]{movie01, movie02, movie03, movie04, movie05};
         doReturn(returned).when(repository).findAll();
-        doNothing().when(repository).save(movie05);
-        doNothing().when(repository).save(movie06);
 
-        manager.add(movie05);
-        manager.add(movie06);
         AfishaItem[] actual = manager.getAfishaList();
         AfishaItem[] expected = new AfishaItem[]{movie05, movie04, movie03, movie02, movie01};
 
@@ -91,33 +43,29 @@ class AfishaManagerTest {
     }
 
     @Test
-    public void shouldRemoveIfExists() {
-        int idToRemove = 3;
-        // Заглушка
-        AfishaItem[] returned = new AfishaItem[]{movie01, movie02, movie04, movie05};
+    public void shouldGetLastTen() {
+        AfishaItem[] returned = new AfishaItem[]{
+                movie01, movie02, movie03, movie04, movie05, movie06,
+                movie07, movie08, movie09, movie10, movie11
+        };
         doReturn(returned).when(repository).findAll();
-        doNothing().when(repository).save(movie05);
-        doNothing().when(repository).removeById(idToRemove);
 
-        manager.add(movie05);
-        manager.removeById(idToRemove);
         AfishaItem[] actual = manager.getAfishaList();
-        AfishaItem[] expected = new AfishaItem[]{movie05, movie04, movie02, movie01};
+        AfishaItem[] expected = new AfishaItem[]{movie11, movie10, movie09, movie08, movie07, movie06, movie05, movie04, movie03, movie02};
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotRemoveIfNotExists() {
-        int idToRemove = 5;
-        // Заглушка
-        AfishaItem[] returned = new AfishaItem[]{movie01, movie02, movie03, movie04};
+    public void shouldRemoveById() {
+        int idToRemove = 2;
+        AfishaItem[] returned = new AfishaItem[]{movie01, movie03};
         doReturn(returned).when(repository).findAll();
         doNothing().when(repository).removeById(idToRemove);
 
         manager.removeById(idToRemove);
         AfishaItem[] actual = manager.getAfishaList();
-        AfishaItem[] expected = new AfishaItem[]{movie04, movie03, movie02, movie01};
+        AfishaItem[] expected = new AfishaItem[]{movie03, movie01};
 
         assertArrayEquals(expected, actual);
     }
