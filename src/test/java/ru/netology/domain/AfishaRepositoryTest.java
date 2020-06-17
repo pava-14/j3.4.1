@@ -75,6 +75,19 @@ class AfishaRepositoryTest {
     }
 
     @Test
+    void shouldNotRemoveIfNotExixstsId() {
+        AfishaRepository expected = new AfishaRepository();
+        expected.save(movie01);
+        expected.save(movie02);
+        expected.save(movie03);
+        expected.save(movie04);
+
+        repository.removeById(5);
+
+        assertArrayEquals(expected.findAll(), repository.findAll());
+    }
+
+    @Test
     void removeAll() {
         int expected = 0;
         repository.removeAll();
