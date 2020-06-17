@@ -19,7 +19,7 @@ public class AfishaRepository {
     public AfishaItem findById(int id) {
         AfishaItem findedItem = null;
         for (AfishaItem item : items) {
-            if(item.getId() == id) {
+            if (item.getId() == id) {
                 findedItem = item;
             }
         }
@@ -27,6 +27,9 @@ public class AfishaRepository {
     }
 
     public void removeById(int id) {
+        if (findById(id) == null) {
+            return;
+        }
         int length = items.length - 1;
         AfishaItem[] tmp = new AfishaItem[length];
         int index = 0;
