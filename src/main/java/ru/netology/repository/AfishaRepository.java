@@ -1,4 +1,6 @@
-package ru.netology.domain;
+package ru.netology.repository;
+
+import ru.netology.domain.AfishaItem;
 
 public class AfishaRepository {
     private AfishaItem[] items = new AfishaItem[0];

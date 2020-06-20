@@ -1,7 +1,7 @@
 package ru.netology.manager;
 
 import ru.netology.domain.AfishaItem;
-import ru.netology.domain.AfishaRepository;
+import ru.netology.repository.AfishaRepository;
 
 public class AfishaManager {
     private AfishaRepository repository;
