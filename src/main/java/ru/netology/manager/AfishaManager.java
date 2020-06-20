@@ -26,42 +26,18 @@ public class AfishaManager {
 
     public AfishaItem[] getAfishaList() {
         // Устанавливаем количество возвращаемых афиш
-        int currentCount = defaultGetCount;
+        // Если установлено отрицательное значение, используем
+        // значение, по-умолчанию
+        int currentCount = (defaultGetCount < 0) ? 10 : defaultGetCount;
         if (currentCount > items.length) {
             currentCount = items.length;
         }
         AfishaItem[] result = new AfishaItem[currentCount];
-
         int index = 0;
         for (int i = items.length - 1; i >= items.length - currentCount; i--) {
             result[index] = items[i];
             index++;
         }
         return result;
-    }
-
-    private boolean isExistsId(int id) {
-        for (AfishaItem item : items) {
-            if (item.getId() == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void removeById(int id) {
-        if (!isExistsId(id)) {
-            return;
-        }
-        int length = items.length - 1;
-        AfishaItem[] tmp = new AfishaItem[length];
-        int index = 0;
-        for (AfishaItem item : items) {
-            if (item.getId() != id) {
-                tmp[index] = item;
-                index++;
-            }
-        }
-        items = tmp;
     }
 }
