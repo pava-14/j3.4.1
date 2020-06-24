@@ -5,6 +5,7 @@ import ru.netology.domain.AfishaItem;
 public class AfishaManager {
     private AfishaItem[] items = new AfishaItem[0];
     private int defaultGetCount = 10;
+    private final int safeCount = 10;
 
     public AfishaManager() {
     }
@@ -27,8 +28,8 @@ public class AfishaManager {
     public AfishaItem[] getAfishaList() {
         // Устанавливаем количество возвращаемых афиш
         // Если установлено отрицательное значение, используем
-        // значение, по-умолчанию
-        int currentCount = (defaultGetCount < 0) ? 10 : defaultGetCount;
+        // значение, заданное в условии задачи
+        int currentCount = (defaultGetCount < 0) ? safeCount : defaultGetCount;
         if (currentCount > items.length) {
             currentCount = items.length;
         }
